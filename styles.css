@@ -1,4 +1,4 @@
-:root { --paper:#f8f8f5; --ink:#171717; --muted:#686864; --line:#d8d8d3; --cobalt:#173fcd; }
+:root { --paper:#f8f8f5; --ink:#171717; --muted:#686864; --line:#d8d8d3; --cobalt:#173fcd; --name-size:clamp(44px,5.5vw,87px); --work-title-size:clamp(33px,4.125vw,65.25px); --about-size:clamp(22px,2.75vw,43.5px); }
 * { box-sizing:border-box; }
 html { scroll-behavior:smooth; }
 body { margin:0; background:var(--paper); color:var(--ink); font-family:"Inter",Arial,sans-serif; text-rendering:optimizeLegibility; }
@@ -16,7 +16,7 @@ nav a:hover::after, nav a:focus-visible::after { right:0; }
 .crosshair::before { content:""; position:absolute; width:1px; height:28px; background:var(--line); left:18px; top:-13px; }
 .coordinates { color:var(--muted); letter-spacing:.06em; }
 .eyebrow { display:none; }
-.hero h1 { margin:0; font-family:"EB Garamond",Georgia,serif; font-weight:400; font-size:clamp(44px,5.5vw,87px); line-height:.83; letter-spacing:-.045em; }
+.hero h1 { margin:0; font-family:"EB Garamond",Georgia,serif; font-weight:400; font-size:var(--name-size); line-height:.83; letter-spacing:-.045em; }
 .dek { margin:36px 0 22px; font-family:"EB Garamond",Georgia,serif; font-size:clamp(23px,2vw,32px); color:#494945; }
 .text-link { display:inline-flex; gap:14px; align-items:center; color:var(--cobalt); font-size:18px; }
 .text-link span { transition:transform 180ms ease; }
@@ -26,13 +26,13 @@ nav a:hover::after, nav a:focus-visible::after { right:0; }
 .section-heading h2 { margin:0; font-family:"EB Garamond",Georgia,serif; font-size:42px; font-weight:400; }
 .section-heading span { height:1px; background:var(--line); }
 .work-list { margin-top:28px; }
-.work-row { display:grid; grid-template-columns:72px 110px minmax(0,1fr) 42px; align-items:center; min-height:118px; border-bottom:1px solid var(--line); }
+.work-row { display:grid; grid-template-columns:72px 110px minmax(0,1fr) 42px; align-items:center; min-height:148px; padding-block:24px; border-bottom:1px solid var(--line); }
 .work-row:first-child { border-top:1px solid var(--line); }
 .work-number,.work-year { font-family:"IBM Plex Mono",monospace; font-size:14px; }
 .work-year { padding-left:24px; border-left:1px solid var(--line); }
 .work-main { padding-left:36px; border-left:1px solid var(--line); display:grid; gap:5px; }
 .work-kind { color:var(--cobalt); text-transform:uppercase; letter-spacing:.13em; font-size:11px; font-weight:500; }
-.work-title { font-family:"EB Garamond",Georgia,serif; font-size:clamp(25px,2.5vw,38px); line-height:1.08; }
+.work-title { font-family:"EB Garamond",Georgia,serif; font-size:var(--work-title-size); line-height:1; }
 .work-note { font-size:12px; color:var(--muted); }
 .arrow { font-size:25px; color:var(--cobalt); transition:transform 180ms ease; }
 .work-row:hover .arrow { transform:translateX(6px); }
@@ -45,10 +45,11 @@ nav a:hover::after, nav a:focus-visible::after { right:0; }
 .about { padding-block:110px 140px; border-top:1px solid var(--line); }
 .about-grid { margin-top:70px; display:grid; grid-template-columns:minmax(0,1.4fr) minmax(280px,.6fr); gap:10vw; align-items:end; }
 .about-grid p { margin:0; font-family:"EB Garamond",Georgia,serif; font-size:22px; line-height:1.5; color:#454541; }
-.about-grid .about-lead { font-size:clamp(42px,5vw,72px); line-height:1.05; color:var(--ink); }
+.about-grid .about-lead { font-size:var(--about-size); line-height:1.12; color:var(--ink); }
 .site-footer { min-height:90px; border-top:1px solid var(--ink); display:flex; align-items:center; justify-content:space-between; font-family:"IBM Plex Mono",monospace; font-size:11px; text-transform:uppercase; letter-spacing:.1em; }
 .site-footer a:hover { color:var(--cobalt); }
 @media (max-width:780px) {
+  :root { --name-size:clamp(42px,11vw,54px); --work-title-size:clamp(31.5px,8.25vw,40.5px); --about-size:clamp(21px,5.5vw,27px); }
   .shell { width:calc(100% - 36px); }
   .site-header { height:68px; }
   .wordmark { font-size:22px; }
@@ -57,20 +58,20 @@ nav a:hover::after, nav a:focus-visible::after { right:0; }
   .hero { min-height:560px; display:block; padding-top:100px; }
   .index-rail { display:none; }
   .eyebrow { display:block; font-family:"IBM Plex Mono",monospace; font-size:10px; text-transform:uppercase; letter-spacing:.12em; color:var(--cobalt); }
-  .hero h1 { margin-top:20px; font-size:clamp(42px,11vw,54px); line-height:.92; }
+  .hero h1 { margin-top:20px; font-size:var(--name-size); line-height:.92; }
   .dek { margin-top:34px; max-width:380px; font-size:24px; }
   .work { padding-bottom:80px; }
   .section-heading h2 { font-size:34px; }
-  .work-row { grid-template-columns:44px minmax(0,1fr) 26px; min-height:124px; }
+  .work-row { grid-template-columns:44px minmax(0,1fr) 26px; min-height:148px; }
   .work-year { display:none; }
   .work-main { padding-left:18px; }
-  .work-title { font-size:26px; }
+  .work-title { font-size:var(--work-title-size); }
   .work-note { display:none; }
   .detail { padding-block:80px; grid-template-columns:1fr; gap:34px; }
   .detail-copy h2 { margin-top:0; font-size:48px; }
   .detail-copy p { font-size:21px; }
   .about { padding-block:80px 100px; }
   .about-grid { margin-top:50px; grid-template-columns:1fr; gap:48px; }
-  .about-grid .about-lead { font-size:43px; }
+  .about-grid .about-lead { font-size:var(--about-size); }
 }
 @media (prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } *,*::before,*::after { transition-duration:.01ms !important; } }
