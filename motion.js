@@ -20,7 +20,7 @@
   const buildStarName=()=>{
     nameCanvas.width=Math.max(1,Math.round(width));nameCanvas.height=Math.max(1,Math.round(height));
     nameCtx.clearRect(0,0,width,height);
-    const fontSize=Math.max(16,Math.min(25,width*.019));
+    const fontSize=Math.max(18,Math.min(29,width*.0215));
     const spacing=Math.max(2.6,fontSize*.18);
     nameCtx.font=`500 ${fontSize}px Inter, sans-serif`;nameCtx.textBaseline="middle";nameCtx.fillStyle="#fff";
     const text="elizabeth won";
@@ -29,12 +29,12 @@
     for(const letter of text){nameCtx.fillText(letter,x,y);x+=nameCtx.measureText(letter).width+spacing;}
     const pixels=nameCtx.getImageData(0,0,nameCanvas.width,nameCanvas.height).data;
     nameStars=[];
-    const step=3;
+    const step=2;
     for(let py=Math.max(0,Math.floor(y-fontSize));py<Math.min(height,Math.ceil(y+fontSize));py+=step){
       for(let px=0;px<Math.min(width,x+3);px+=step){
         if(pixels[(py*nameCanvas.width+px)*4+3]>85){
           const seed=(px*17+py*31)%97;
-          nameStars.push({x:px,y:py,r:.55+(seed%7)*.09,phase:seed*.19,speed:.35+(seed%11)*.025});
+          nameStars.push({x:px,y:py,r:.62+(seed%7)*.1,phase:seed*.19,speed:.7+(seed%11)*.045});
         }
       }
     }
@@ -48,8 +48,8 @@
 
   const drawNameStars=(seconds)=>{
     nameStars.forEach((star,index)=>{
-      const shimmer=reduceMotion?.78:.48+.4*(.5+.5*Math.sin(seconds*star.speed+star.phase));
-      ctx.fillStyle=index%9===0?`rgba(241,199,91,${shimmer*.82})`:`rgba(225,239,255,${shimmer})`;
+      const shimmer=reduceMotion?.88:.12+.88*(.5+.5*Math.sin(seconds*star.speed+star.phase));
+      ctx.fillStyle=index%11===0?`rgba(241,199,91,${Math.max(.18,shimmer*.9)})`:`rgba(232,243,255,${shimmer})`;
       ctx.beginPath();ctx.arc(star.x,star.y,star.r,0,Math.PI*2);ctx.fill();
     });
   };
