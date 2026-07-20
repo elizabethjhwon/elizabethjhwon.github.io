@@ -85,3 +85,19 @@ a { color:inherit; text-decoration:none; }
   .star-cursor.is-hovering span { filter:brightness(1.3) drop-shadow(0 0 6px #f7de91); transform:translate(-50%,-50%) scale(1.25) rotate(45deg); }
   @keyframes cursor-twinkle { 0%,100%{transform:translate(-50%,-50%) scale(.82) rotate(0deg)} 50%{transform:translate(-50%,-50%) scale(1.05) rotate(45deg)} }
 }
+
+/* Continuous midnight palette */
+body { background:#061a35; color:#edf3f8; }
+.signature-hero { height:100svh; min-height:100vh; max-height:none; background:#071d3e; }
+.side-nav { background:rgba(5,24,50,.94); border-right-color:rgba(176,204,226,.25); }
+.side-mark,.side-nav nav a,.eyebrow,.text-link,.work-number,.work-kind,.arrow { color:#8eb8ff; }
+.side-nav nav a::after { background:#f4cf66; }
+.intro,.work,.site-footer { background:#061a35; }
+.intro { border-bottom-color:rgba(176,204,226,.22); }
+.hero-bio,.work-title { color:#edf3f8; }
+.work-note { color:#a9bac8; }
+.section-heading span,.work-row,.work-row:first-child { border-color:rgba(176,204,226,.22); }
+.work-year,.work-main { border-color:rgba(176,204,226,.22); }
+.work-row:hover { background:rgba(142,184,255,.08); }
+.site-footer { border-top-color:#8eb8ff; }
+.site-footer,.site-footer a { color:#dce9f2; }

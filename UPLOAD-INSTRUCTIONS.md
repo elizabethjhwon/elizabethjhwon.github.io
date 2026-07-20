@@ -1,10 +1,13 @@
-# Publish the night-sky design
+# Publish the continuous dark-blue update
 
-After unzipping, copy the contents of `elizabeth-night-sky-star-cursor` into your existing website repository. From inside that repository, run:
+From inside your existing website repository, run:
 
 ```bash
-cp -R ~/Downloads/elizabeth-night-sky-star-cursor/. .
+cd ~/Downloads
+unzip -o elizabeth-night-sky-full-blue-final.zip
+cd -
+cp -R ~/Downloads/elizabeth-night-sky-full-blue/. .
 git add .
-git commit -m "Restore night sky design with star cursor"
+git commit -m "Extend night sky across the full site"
 git push origin main
 ```
