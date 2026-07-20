@@ -101,3 +101,9 @@ body { background:#061a35; color:#edf3f8; }
 .work-row:hover { background:rgba(142,184,255,.08); }
 .site-footer { border-top-color:#8eb8ff; }
 .site-footer,.site-footer a { color:#dce9f2; }
+
+.wave-intro { position:absolute; z-index:2; left:clamp(28px,7vw,110px); bottom:clamp(36px,7vh,76px); width:min(650px,calc(100% - 80px)); padding:24px 28px 26px; color:#edf3f8; background:rgba(4,28,55,.58); border:1px solid rgba(190,218,236,.24); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); }
+.wave-intro .eyebrow { margin-bottom:15px; color:#9dc4f2; }
+.wave-intro .hero-bio { margin:0 0 18px; max-width:none; color:#edf3f8; font-size:clamp(18px,1.75vw,25px); line-height:1.28; }
+.wave-intro .text-link { color:#f4cf66; font-size:12px; }
+@media(max-width:650px){.wave-intro{left:20px;bottom:34px;width:calc(100% - 40px);padding:19px 20px}.wave-intro .hero-bio{font-size:17px}.wave-intro .eyebrow{font-size:9px}}

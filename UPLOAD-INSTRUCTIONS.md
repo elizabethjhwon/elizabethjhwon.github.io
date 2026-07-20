@@ -1,11 +1,11 @@
-# Publish the starlit-tide update
+# Publish the introduction-on-waves update
 
 ```bash
 cd ~/Downloads
-unzip -o elizabeth-starlit-tide-final.zip
+unzip -o elizabeth-introduction-on-waves-final.zip
 cd -
-cp -R ~/Downloads/elizabeth-starlit-tide/. .
+cp -R ~/Downloads/elizabeth-introduction-on-waves/. .
 git add .
-git commit -m "Replace fish with starlit tide"
+git commit -m "Place introduction over the waves"
 git push origin main
 ```
