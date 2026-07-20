@@ -1,11 +1,11 @@
-# Publish the introduction-on-waves update
+# Publish the reordered-work update
 
 ```bash
 cd ~/Downloads
-unzip -o elizabeth-introduction-on-waves-final.zip
+unzip -o elizabeth-reordered-work-final.zip
 cd -
-cp -R ~/Downloads/elizabeth-introduction-on-waves/. .
+cp -R ~/Downloads/elizabeth-reordered-work/. .
 git add .
-git commit -m "Place introduction over the waves"
+git commit -m "Reorder work and update project notes"
 git push origin main
 ```
