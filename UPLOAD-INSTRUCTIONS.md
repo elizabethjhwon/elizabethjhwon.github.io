@@ -1,13 +1,11 @@
-# Publish the continuous dark-blue update
-
-From inside your existing website repository, run:
+# Publish the minimal moon and fluttering-fish update
 
 ```bash
 cd ~/Downloads
-unzip -o elizabeth-night-sky-full-blue-final.zip
+unzip -o elizabeth-minimal-moon-fluttering-fish-final.zip
 cd -
-cp -R ~/Downloads/elizabeth-night-sky-full-blue/. .
+cp -R ~/Downloads/elizabeth-minimal-moon-fluttering-fish/. .
 git add .
-git commit -m "Extend night sky across the full site"
+git commit -m "Simplify sky and animate fish fins"
 git push origin main
 ```
