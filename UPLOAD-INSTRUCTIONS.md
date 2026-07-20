@@ -1,14 +1,10 @@
-# Publish the light-blue Option 4 design
+# Publish the night-sky design
 
-Unzip the download, then copy the **contents** of `elizabeth-option-4-light-blue` into your existing `elizabeth-won-website` folder. Allow Finder to replace matching files and merge folders.
-
-Then run:
+After unzipping, copy the contents of `elizabeth-night-sky-star-cursor` into your existing website repository. From inside that repository, run:
 
 ```bash
-cd ~/Downloads/elizabeth-won-website
+cp -R ~/Downloads/elizabeth-night-sky-star-cursor/. .
 git add .
-git commit -m "Use light blue project collage design"
+git commit -m "Restore night sky design with star cursor"
 git push origin main
 ```
-
-When GitHub Pages finishes, the design will appear at `https://elizabethjhwon.github.io/`.
