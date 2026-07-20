@@ -1,11 +1,11 @@
-# Publish the minimal floral-fish update
+# Publish the starlit-tide update
 
 ```bash
 cd ~/Downloads
-unzip -o elizabeth-minimal-floral-fish-final.zip
+unzip -o elizabeth-starlit-tide-final.zip
 cd -
-cp -R ~/Downloads/elizabeth-minimal-floral-fish/. .
+cp -R ~/Downloads/elizabeth-starlit-tide/. .
 git add .
-git commit -m "Simplify floral fish"
+git commit -m "Replace fish with starlit tide"
 git push origin main
 ```
