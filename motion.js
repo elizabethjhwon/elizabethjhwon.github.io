@@ -12,32 +12,51 @@
   let trace = [];
   let startTime = 0;
 
+  const smoothTrace = (values) => {
+    const result = values.slice();
+    for (let pass = 0; pass < 4; pass += 1) {
+      for (let x = startX + 2; x < endX - 2; x += 1) {
+        result[x] = (result[x - 2] + result[x - 1] + result[x] * 2 + result[x + 1] + result[x + 2]) / 6;
+      }
+    }
+    return result;
+  };
+
   const buildSignature = () => {
     mask.width = Math.max(1, Math.round(width));
     mask.height = Math.max(1, Math.round(height));
     maskCtx.clearRect(0, 0, width, height);
-    const fontSize = Math.min(width * 0.27, height * 0.31, 170);
+    const fontSize = Math.min(width * 0.22, height * 0.4, 310);
     maskCtx.font = `${fontSize}px Allura, cursive`;
     maskCtx.textAlign = "center";
     maskCtx.textBaseline = "middle";
     maskCtx.fillStyle = "white";
     maskCtx.fillText("elizabeth", width * 0.5, height * 0.48);
     const metrics = maskCtx.measureText("elizabeth");
-    startX = Math.max(18, Math.floor(width * 0.5 - metrics.width * 0.52));
-    endX = Math.min(width - 18, Math.ceil(width * 0.5 + metrics.width * 0.52));
+    startX = Math.max(28, Math.floor(width * 0.5 - metrics.width * 0.515));
+    endX = Math.min(width - 28, Math.ceil(width * 0.5 + metrics.width * 0.515));
     const pixels = maskCtx.getImageData(0, 0, mask.width, mask.height).data;
-    trace = new Array(Math.ceil(width)).fill(height * 0.48);
-    let previous = height * 0.48;
+    const raw = new Array(Math.ceil(width)).fill(height * 0.5);
+    let previous = height * 0.5;
+    let lastInkX = startX;
+
     for (let x = startX; x <= endX; x += 1) {
       const candidates = [];
-      for (let y = Math.floor(height * 0.24); y < Math.ceil(height * 0.72); y += 2) {
-        if (pixels[(Math.floor(y) * mask.width + Math.floor(x)) * 4 + 3] > 40) candidates.push(y);
+      for (let y = Math.floor(height * 0.18); y < Math.ceil(height * 0.78); y += 2) {
+        if (pixels[(Math.floor(y) * mask.width + Math.floor(x)) * 4 + 3] > 55) candidates.push(y);
       }
       if (candidates.length) {
-        previous = candidates.reduce((best, y) => Math.abs(y - previous) < Math.abs(best - previous) ? y : best, candidates[0]);
+        const next = candidates.reduce((best, y) => Math.abs(y - previous) < Math.abs(best - previous) ? y : best, candidates[0]);
+        const gap = x - lastInkX;
+        if (gap > 1) {
+          for (let gx = lastInkX + 1; gx < x; gx += 1) raw[gx] = previous + (next - previous) * ((gx - lastInkX) / gap);
+        }
+        previous = next;
+        lastInkX = x;
       }
-      trace[x] = previous;
+      raw[x] = previous;
     }
+    trace = smoothTrace(raw);
   };
 
   const resize = () => {
@@ -50,56 +69,43 @@
     buildSignature();
   };
 
-  const draw = (progress, time) => {
+  const draw = (progress) => {
     ctx.clearRect(0, 0, width, height);
     ctx.fillStyle = "#071d3e";
     ctx.fillRect(0, 0, width, height);
-
-    const cx = width * 0.5;
-    const cy = height * 0.47;
-    const base = Math.min(width, height) * 0.13;
-    for (let i = 0; i < 8; i += 1) {
-      const phase = time * (0.00008 + i * 0.000005) + i * 0.7;
-      const radius = base + i * base * 0.37;
-      ctx.beginPath();
-      ctx.ellipse(cx, cy, radius * 1.12, radius * 0.48, phase * 0.24, 0, Math.PI * 2);
-      ctx.strokeStyle = i % 3 === 0 ? "rgba(142,184,255,.34)" : "rgba(255,255,255,.12)";
-      ctx.lineWidth = i % 3 === 0 ? 1.1 : 0.7;
-      ctx.stroke();
-    }
-
     const revealX = startX + (endX - startX) * progress;
+
     ctx.save();
     ctx.beginPath();
-    ctx.rect(0, 0, revealX + 4, height);
+    ctx.rect(0, 0, revealX + 5, height);
     ctx.clip();
     ctx.drawImage(mask, 0, 0);
     ctx.restore();
 
     const dotX = Math.max(startX, Math.min(endX, Math.round(revealX)));
-    const dotY = trace[dotX] || height * 0.48;
+    const dotY = trace[dotX] || height * 0.5;
     ctx.beginPath();
-    ctx.arc(dotX, dotY, 5.5, 0, Math.PI * 2);
+    ctx.arc(dotX, dotY, 6, 0, Math.PI * 2);
     ctx.fillStyle = "#f1c75b";
-    ctx.shadowColor = "rgba(241,199,91,.65)";
-    ctx.shadowBlur = 14;
+    ctx.shadowColor = "rgba(241,199,91,.8)";
+    ctx.shadowBlur = 18;
     ctx.fill();
     ctx.shadowBlur = 0;
   };
 
   const animate = (timestamp) => {
     if (!startTime) startTime = timestamp;
-    const cycle = 8200;
+    const cycle = 9000;
     const elapsed = (timestamp - startTime) % cycle;
-    const progress = elapsed < 6000 ? Math.min(elapsed / 6000, 1) : 1;
-    draw(progress, timestamp);
+    const progress = elapsed < 6500 ? elapsed / 6500 : 1;
+    draw(Math.min(progress, 1));
     requestAnimationFrame(animate);
   };
 
   window.addEventListener("resize", resize);
   const start = () => {
     resize();
-    if (reduceMotion) draw(1, 0); else requestAnimationFrame(animate);
+    if (reduceMotion) draw(1); else requestAnimationFrame(animate);
   };
   if (document.fonts?.ready) document.fonts.ready.then(start); else start();
 })();
